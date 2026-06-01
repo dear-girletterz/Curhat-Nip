@@ -224,9 +224,9 @@
                 return;
             }
 
-            generatedCode = "GLTZ-" + generateRandomCode();
+            generatedCode = "NIP-" + generateRandomCode();
 
-            set(ref(database, 'curhatan/' + generatedCode), {
+            set(ref(database, 'curhatan_teman/' + generatedCode), {
                 isi: isiCurhat,
                 balasan: "", 
                 waktu: new Date().toISOString()
