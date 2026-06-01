@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cerita Space 📝</title>
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Gradient langit senja pastel yang sangat kalem */
+            background: linear-gradient(135deg, #d4eaf7 0%, #eef1f6 50%, #e8dbfc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 25px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(165, 180, 200, 0.2);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        h1 {
+            color: #5b73a7;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+        
+        /* Kotak Mengetik Minimalis & Estetik */
+        .input-wrapper {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 18px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(127, 164, 199, 0.25);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #7fa4c7;
+            box-shadow: 0 0 0 3px rgba(127, 164, 199, 0.15);
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            border: none;
+            outline: none;
+            resize: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            color: #495057;
+            background: transparent;
+            line-height: 1.6;
+        }
+
+        textarea::placeholder {
+            color: #adb5bd;
+        }
+
+        /* Desain Tombol */
+        .btn {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 14px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-kirim {
+            background-color: #7fa4c7;
+            color: white;
+            box-shadow: 0 8px 20px rgba(127, 164, 199, 0.25);
+        }
+
+        .btn-kirim:hover {
+            background-color: #6b92b7;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(127, 164, 199, 0.35);
+        }
+
+        /* Tombol Salin menggunakan warna Biru Pastel Lembut agar senada */
+        .btn-salin {
+            background-color: #9bbcdb; 
+            color: white;
+            display: none;
+            margin-top: 12px;
+            box-shadow: 0 5px 15px rgba(155, 188, 219, 0.2);
+        }
+
+        .btn-salin:hover {
+            background-color: #89add0;
+        }
+
+        .btn-back {
+            background: transparent;
+            color: #8a929a;
+            font-size: 0.85rem;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        .btn-back:hover {
+            color: #5b73a7;
+        }
+
+        /* Kotak Hasil Setelah Kirim - Ungu diganti super soft pastel */
+        .result-box {
+            display: none;
+            background: rgba(244, 240, 249, 0.8); /* Ungu susu super samar */
+            padding: 20px;
+            border-radius: 18px;
+            margin-top: 20px;
+            border: 1px solid rgba(165, 180, 200, 0.3);
+            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .code-display {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6e83b0; /* Warna biru-abu teduh, tidak mencolok */
+            margin: 5px 0;
+            letter-spacing: 1px;
+        }
+
+        .info-text {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Cerita Space 📝</h1>
+        
+        <!-- Tempat Ngetik Estetik -->
+        <div class="input-wrapper">
+            <textarea id="pesan" placeholder="Keluarin semuanya lewat tulisan aja, fighting! ^O^"></textarea>
+        </div>
+        
+        <!-- Tombol Kirim -->
+        <button id="btnKirim" class="btn btn-kirim">Kirim Cerita 💖</button>
+
+        <!-- Kotak Kode Balasan (Muncul setelah klik Kirim) -->
+        <div id="resultArea" class="result-box">
+            <div id="kodeDisplay" class="code-display">GLTZ-0000</div>
+            <p class="info-text">salin kode untuk melihat balasan admin</p>
+            <button id="btnSalin" class="btn btn-salin">Salin Kode 📌</button>
+        </div>
+
+        <a href="index.html" class="btn-back">⬅ Kembali ke Home</a>
+    </div>
+
+    <!-- Firebase Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // ⚠️ PASTE KODE FIREBASE CONFIG KAMU DI SINI
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEON1nJICGSzYgdcYxgw7EZAV1i1-0ubE",
+  authDomain: "dear-girletterz-c50fa.firebaseapp.com",
+  databaseURL: "https://dear-girletterz-c50fa-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dear-girletterz-c50fa",
+  storageBucket: "dear-girletterz-c50fa.firebasestorage.app",
+  messagingSenderId: "740636160372",
+  appId: "1:740636160372:web:f35bd6fbd947a2766d7c21",
+  measurementId: "G-8XFS04PL45"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        function generateRandomCode() {
+            return Math.floor(1000 + Math.random() * 9000);
+        }
+
+        let generatedCode = "";
+
+        document.getElementById('btnKirim').addEventListener('click', function() {
+            const isiCurhat = document.getElementById('pesan').value;
+            if(isiCurhat.trim() === "") {
+                alert("Jangan dikosongin ya, tulis sesuatu dulu.");
+                return;
+            }
+
+            generatedCode = "GLTZ-" + generateRandomCode();
+
+            set(ref(database, 'curhatan/' + generatedCode), {
+                isi: isiCurhat,
+                balasan: "", 
+                waktu: new Date().toISOString()
+            }).then(() => {
+                document.getElementById('kodeDisplay').innerText = generatedCode;
+                document.getElementById('resultArea').style.display = "block";
+                document.getElementById('btnSalin').style.display = "block";
+                document.getElementById('pesan').disabled = true; 
+                document.getElementById('btnKirim').disabled = true; 
+                document.getElementById('btnKirim').style.opacity = "0.6";
+            }).catch((err) => {
+                alert("Gagal kirim curhat: " + err.message);
+            });
+        });
+
+        document.getElementById('btnSalin').addEventListener('click', function() {
+            navigator.clipboard.writeText(generatedCode).then(() => {
+                alert("Kode " + generatedCode + " berhasil disalin! Jangan sampai hilang ya ✨");
+            }).catch(() => {
+                alert("Gagal menyalin otomatis. Silakan salin manual kodenya ya.");
+            });
+        });
+    </script>
+</body>
+</html>
