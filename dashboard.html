@@ -230,7 +230,7 @@ if (localStorage.getItem("admin_logged_in") !== "true") {
         const app = initializeApp(firebaseConfig);
         const database = getDatabase(app);
 
-        const curhatRef = ref(database, 'curhatan');
+        const curhatRef = ref(database, 'curhatan_teman');
 
         onValue(curhatRef, (snapshot) => {
             document.getElementById('loading').style.display = "none";
@@ -289,7 +289,7 @@ if (localStorage.getItem("admin_logged_in") !== "true") {
                 return;
             }
 
-            const spesifikRef = ref(database, 'curhatan/' + kode);
+            const spesifikRef = ref(database, 'curhatan_teman/' + kode);
             update(spesifikRef, {
                 balasan: teksBalasan
             }).then(() => {
@@ -305,7 +305,7 @@ if (localStorage.getItem("admin_logged_in") !== "true") {
             const yakin = confirm(`Kamu yakin mau menghapus curhatan dengan kode ${kode}? Data akan hilang permanen lho.`);
             
             if (yakin) {
-                const spesifikRef = ref(database, 'curhatan/' + kode);
+                const spesifikRef = ref(database, 'curhatan_teman/' + kode);
                 remove(spesifikRef).then(() => {
                     alert(`Curhatan ${kode} berhasil dihapus! 🗑️`);
                 }).catch((err) => {
