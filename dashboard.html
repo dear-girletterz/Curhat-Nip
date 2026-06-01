@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard HANYFA 🔒</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #d4eaf7 0%, #eef1f6 50%, #e8dbfc 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #5b73a7;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* Kartu List Curhatan */
+        .curhat-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 10px 25px rgba(165, 180, 200, 0.15);
+            position: relative;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed rgba(127, 164, 199, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .meta-info {
+            text-align: left;
+        }
+
+        .code-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #5b73a7;
+        }
+
+        .date-text {
+            font-size: 0.75rem;
+            color: #95a5a6;
+            margin-top: 2px;
+        }
+
+        /* Label Status Sudah/Belum Dibalas */
+        .status-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 100px;
+        }
+
+        .status-belum {
+            background-color: rgba(255, 183, 77, 0.2);
+            color: #e65100;
+        }
+
+        .status-sudah {
+            background-color: rgba(165, 214, 167, 0.3);
+            color: #2e7d32;
+        }
+
+        .curhat-isi {
+            font-size: 0.95rem;
+            color: #495057;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(127, 164, 199, 0.1);
+        }
+
+        /* Bagian Form Balas */
+        .reply-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+
+        textarea {
+            width: 100%;
+            height: 80px;
+            border: 1px solid rgba(127, 164, 199, 0.25);
+            border-radius: 12px;
+            padding: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.88rem;
+            resize: none;
+            outline: none;
+            background: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            border-color: #7fa4c7;
+            box-shadow: 0 0 0 3px rgba(127, 164, 199, 0.1);
+        }
+
+        /* Baris Tombol di Bawah Textarea */
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Tombol Ikon Sampah */
+        .btn-delete {
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            padding: 8px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+
+        .btn-delete:hover {
+            background: #e74c3c;
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .btn-reply {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            background-color: #7fa4c7;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reply:hover {
+            background-color: #6b92b7;
+            transform: translateY(-1px);
+        }
+
+        .no-data {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 40px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Dashboard HANYFA 🔒</h1>
+        <p>Feeling gue mereka cerita hal yang nggak penting -_-</p>
+    </div>
+
+    <div class="container" id="loading">
+        <p style="text-align: center; color: #7f8c8d;">Memuat curhatan...</p>
+    </div>
+    <div class="container" id="dashboardContainer" style="display:none;"></div>
+
+    <script type="module">
+        // 🔒 SATPAM PENJAGA: Cek apakah user sudah login atau belum
+if (localStorage.getItem("admin_logged_in") !== "true") {
+    alert("Eits, mau menyelinap ya? Login dulu gih! 😜");
+    window.location.href = "login.html";
+}
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, onValue, update, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // ⚠️ PASTE KODE FIREBASE CONFIG KAMU DI SINI
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEON1nJICGSzYgdcYxgw7EZAV1i1-0ubE",
+  authDomain: "dear-girletterz-c50fa.firebaseapp.com",
+  databaseURL: "https://dear-girletterz-c50fa-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dear-girletterz-c50fa",
+  storageBucket: "dear-girletterz-c50fa.firebasestorage.app",
+  messagingSenderId: "740636160372",
+  appId: "1:740636160372:web:f35bd6fbd947a2766d7c21",
+  measurementId: "G-8XFS04PL45"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        const curhatRef = ref(database, 'curhatan');
+
+        onValue(curhatRef, (snapshot) => {
+            document.getElementById('loading').style.display = "none";
+            const container = document.getElementById('dashboardContainer');
+            container.style.display = "flex";
+            container.innerHTML = ""; 
+
+            if (snapshot.exists()) {
+                const allData = snapshot.val();
+                
+                const sortedKeys = Object.keys(allData).sort((a, b) => {
+                    return new Date(allData[b].waktu) - new Date(allData[a].waktu);
+                });
+
+                sortedKeys.forEach((kode) => {
+                    const data = allData[kode];
+                    
+                    const opsiWaktu = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+                    const tanggalFormat = new Date(data.waktu).toLocaleDateString('id-ID', opsiWaktu);
+
+                    const sudahDibalas = data.balasan && data.balasan.trim() !== "";
+                    const statusClass = sudahDibalas ? "status-sudah" : "status-belum";
+                    const statusText = sudahDibalas ? "Sudah Dibalas ✅" : "Belum Dibalas ⏳";
+
+                    const card = document.createElement('div');
+                    card.className = "curhat-card";
+                    card.innerHTML = `
+                        <div class="card-top">
+                            <div class="meta-info">
+                                <div class="code-title">${kode}</div>
+                                <div class="date-text">📅 ${tanggalFormat}</div>
+                            </div>
+                            <span class="status-badge ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="curhat-isi">${data.isi}</div>
+                        <div class="reply-section">
+                            <textarea id="reply-${kode}" placeholder="Tulis kata-kata hangatmu di sini...">${data.balasan || ""}</textarea>
+                            <div class="action-row">
+                                <button class="btn-delete" onclick="hapusCurhat('${kode}')">🗑️ Hapus</button>
+                                <button class="btn-reply" onclick="kirimBalasan('${kode}')">Kirim Balasan ✨</button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } else {
+                container.innerHTML = `<div class="no-data">Belum ada curhatan yang masuk nih... 🕊️</div>`;
+            }
+        });
+
+        window.kirimBalasan = function(kode) {
+            const teksBalasan = document.getElementById(`reply-${kode}`).value;
+            
+            if (teksBalasan.trim() === "") {
+                alert("Kotak balasannya diisi dulu ya!");
+                return;
+            }
+
+            const spesifikRef = ref(database, 'curhatan/' + kode);
+            update(spesifikRef, {
+                balasan: teksBalasan
+            }).then(() => {
+                alert(`Balasan untuk ${kode} berhasil terkirim! ✨`);
+            }).catch((err) => {
+                alert("Gagal mengirim balasan: " + err.message);
+            });
+        }
+
+        // FUNGSI BARU: Untuk menghapus data dari Firebase
+        window.hapusCurhat = function(kode) {
+            // Memunculkan konfirmasi biar gak sengaja kepencet hapus
+            const yakin = confirm(`Kamu yakin mau menghapus curhatan dengan kode ${kode}? Data akan hilang permanen lho.`);
+            
+            if (yakin) {
+                const spesifikRef = ref(database, 'curhatan/' + kode);
+                remove(spesifikRef).then(() => {
+                    alert(`Curhatan ${kode} berhasil dihapus! 🗑️`);
+                }).catch((err) => {
+                    alert("Gagal menghapus: " + err.message);
+                });
+            }
+        }
+    </script>
+</body>
+</html>
