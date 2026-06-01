@@ -188,7 +188,7 @@
         
         <!-- Kotak Input Kode -->
         <div class="input-wrapper">
-            <input type="text" id="kodeInput" placeholder="GLTZ-xxxx" autocomplete="off">
+            <input type="text" id="kodeInput" placeholder="NIP-xxxx" autocomplete="off">
         </div>
         
         <!-- Tombol Lihat Balasan -->
@@ -235,7 +235,7 @@
             }
 
             // Ambil data dari Firebase berdasarkan kode yang dimasukkan
-            const curhatRef = ref(database, 'curhatan/' + kode);
+            const curhatRef = ref(database, 'curhatan_teman/' + kode);
             
             get(curhatRef).then((snapshot) => {
                 if (snapshot.exists()) {
