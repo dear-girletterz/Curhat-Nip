@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cek Balasan 🪧</title>
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Gradient langit senja pastel yang sangat kalem (Sama dengan halaman lainnya) */
+            background: linear-gradient(135deg, #d4eaf7 0%, #eef1f6 50%, #e8dbfc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 25px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(165, 180, 200, 0.2);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        h1 {
+            color: #5b73a7;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            letter-spacing: -0.5px;
+        }
+
+        .label-text {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+            text-align: left;
+            display: block;
+            padding-left: 5px;
+            font-weight: 500;
+        }
+        
+        /* Kotak Input Kode */
+        .input-wrapper {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(127, 164, 199, 0.25);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #7fa4c7;
+            box-shadow: 0 0 0 3px rgba(127, 164, 199, 0.15);
+        }
+
+        input {
+            width: 100%;
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            color: #495057;
+            background: transparent;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        input::placeholder {
+            color: #adb5bd;
+            font-weight: 400;
+            letter-spacing: 0px;
+        }
+
+        /* Tombol */
+        .btn {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 14px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-lihat {
+            background-color: #7fa4c7;
+            color: white;
+            box-shadow: 0 8px 20px rgba(127, 164, 199, 0.25);
+        }
+
+        .btn-lihat:hover {
+            background-color: #6b92b7;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(127, 164, 199, 0.35);
+        }
+
+        .btn-back {
+            background: transparent;
+            color: #8a929a;
+            font-size: 0.85rem;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        .btn-back:hover {
+            color: #5b73a7;
+        }
+
+        /* Kotak Hasil Tampilan Curhat & Balasan */
+        .display-box {
+            display: none;
+            margin-top: 25px;
+            text-align: left;
+            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .title-curhat { color: #7fa4c7; }
+        .title-balasan { color: #9bbcdb; }
+
+        .content-text {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            color: #495057;
+            line-height: 1.6;
+            margin-bottom: 18px;
+            border: 1px solid rgba(127, 164, 199, 0.15);
+        }
+
+        .no-reply {
+            color: #8a929a;
+            font-style: italic;
+            background: rgba(244, 240, 249, 0.6);
+            border: 1px dashed rgba(165, 180, 200, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Cek Balasan 🪧</h1>
+        
+        <!-- Label Informasi Kecil -->
+        <label class="label-text" for="kodeInput">tulis kode buat lihat balasan admin, ya!</label>
+        
+        <!-- Kotak Input Kode -->
+        <div class="input-wrapper">
+            <input type="text" id="kodeInput" placeholder="GLTZ-xxxx" autocomplete="off">
+        </div>
+        
+        <!-- Tombol Lihat Balasan -->
+        <button id="btnCek" class="btn btn-lihat">Lihat Balasan ✨</button>
+
+        <!-- Area Hasil Tampilan Curhat & Balasan dari Firebase -->
+        <div id="displayArea" class="display-box">
+            <div class="section-title title-curhat">Curhatan Kamu:</div>
+            <div id="textCurhat" class="content-text"></div>
+
+            <div class="section-title title-balasan">Balasan Admin:</div>
+            <div id="textBalasan" class="content-text"></div>
+        </div>
+
+        <a href="index.html" class="btn-back">⬅ Kembali ke Home</a>
+    </div>
+
+    <!-- Firebase Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+        // ⚠️ PASTE KODE FIREBASE CONFIG KAMU DI SINI
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEON1nJICGSzYgdcYxgw7EZAV1i1-0ubE",
+  authDomain: "dear-girletterz-c50fa.firebaseapp.com",
+  databaseURL: "https://dear-girletterz-c50fa-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "dear-girletterz-c50fa",
+  storageBucket: "dear-girletterz-c50fa.firebasestorage.app",
+  messagingSenderId: "740636160372",
+  appId: "1:740636160372:web:f35bd6fbd947a2766d7c21",
+  measurementId: "G-8XFS04PL45"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        document.getElementById('btnCek').addEventListener('click', function() {
+            const kode = document.getElementById('kodeInput').value.trim();
+            
+            if(kode === "") {
+                alert("Kodenya diisi dulu yaa!");
+                return;
+            }
+
+            // Ambil data dari Firebase berdasarkan kode yang dimasukkan
+            const curhatRef = ref(database, 'curhatan/' + kode);
+            
+            get(curhatRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    
+                    // Isi teks curhatan
+                    document.getElementById('textCurhat').innerText = data.isi;
+                    document.getElementById('textCurhat').classList.remove('no-reply');
+                    
+                    // Cek apakah sudah dibalas oleh kamu/admin
+                    if (data.balasan && data.balasan.trim() !== "") {
+                        document.getElementById('textBalasan').innerText = data.balasan;
+                        document.getElementById('textBalasan').classList.remove('no-reply');
+                    } else {
+                        document.getElementById('textBalasan').innerText = "Sabar eyy, ceritamu belum dibalas sama HANYFA. Coba cek lagi ntar hehe 🫶";
+                        document.getElementById('textBalasan').classList.add('no-reply');
+                    }
+                    
+                    // Tampilkan area hasil
+                    document.getElementById('displayArea').style.display = "block";
+                } else {
+                    alert("Yahh, kode '" + kode + "' nggak ditemukan. Coba cek lagi penulisan kodenya ya!");
+                    document.getElementById('displayArea').style.display = "none";
+                }
+            }).catch((err) => {
+                alert("Terjadi kesalahan saat mengambil data: " + err.message);
+            });
+        });
+    </script>
+</body>
+</html>
