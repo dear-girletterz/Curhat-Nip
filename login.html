@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login 🔐</title>
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #d4eaf7 0%, #eef1f6 50%, #e8dbfc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(165, 180, 200, 0.2);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        h1 {
+            color: #5b73a7;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        p {
+            color: #7f8c8d;
+            font-size: 0.85rem;
+            margin-bottom: 25px;
+        }
+
+        /* Wrapper Input Dibuat Relative & Flex agar Ikon Mata Bisa Sejajar */
+        .input-wrapper {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(127, 164, 199, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        input {
+            width: 85%;
+            border: none;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: #495057;
+            background: transparent;
+            text-align: left; /* Diubah ke kiri biar rapi saat digabung tombol mata */
+            padding-left: 5px;
+        }
+
+        /* Desain Ikon Mata */
+        .toggle-password {
+            cursor: pointer;
+            user-select: none;
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            transition: color 0.2s ease;
+            padding-right: 5px;
+        }
+
+        .toggle-password:hover {
+            color: #5b73a7;
+        }
+
+        .btn-login {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 14px;
+            border: none;
+            border-radius: 16px;
+            background-color: #7fa4c7;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(127, 164, 199, 0.25);
+        }
+
+        .btn-login:hover {
+            background-color: #6b92b7;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Admin Room 🔐</h1>
+        <p>Silakan masukkan password rahasia kamu</p>
+        
+        <div class="input-wrapper">
+            <!-- Input Password -->
+            <input type="password" id="passwordInput" placeholder="Ketik password di sini...">
+            <!-- Tombol Mata 👀 -->
+            <span class="toggle-password" id="eyeIcon">👁️</span>
+        </div>
+        
+        <button id="btnLogin" class="btn-login">Masuk Dashboard ✨</button>
+    </div>
+
+    <script>
+        // 🔑 GANTI TULISAN "gurlz123" DI BAWAH INI JADI PASSWORD YANG KAMU MAU!
+        const PASSWORD_RAHASIA = "admin@hanyfapinterbgt.com"; 
+
+        const passwordInput = document.getElementById('passwordInput');
+        const eyeIcon = document.getElementById('eyeIcon');
+
+        // Logika untuk Intip Password (Show/Hide)
+        eyeIcon.addEventListener('click', function () {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.innerText = '🔒'; // Berubah jadi gembok pas kebuka (atau tetep 👁️ juga boleh)
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.innerText = '👁️'; // Balik jadi mata lagi
+            }
+        });
+
+        document.getElementById('btnLogin').addEventListener('click', function() {
+            const inputUser = passwordInput.value;
+
+            if (inputUser === PASSWORD_RAHASIA) {
+                localStorage.setItem("admin_logged_in", "true");
+                alert("Login sukses! Selamat bekerja Admin Kiyutt 😗");
+                window.location.href = "dashboard.html";
+            } else {
+                alert("Password salah! Siapa kamu? 🤨");
+            }
+        });
+
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('btnLogin').click();
+            }
+        });
+    </script>
+</body>
+</html>
