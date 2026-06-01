@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mau Cerita, Nip 💐</title>
+    <!-- Google Fonts: Poppins (Clean, Modern, Aesthetic) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Gradient langit senja pastel yang sangat kalem */
+            background: linear-gradient(135deg, #d4eaf7 0%, #eef1f6 50%, #e8dbfc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(20px); /* Efek Glassmorphism transparan estetik */
+            -webkit-backdrop-filter: blur(20px);
+            padding: 45px 30px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(165, 180, 200, 0.2);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+
+        h1 {
+            color: #5b73a7; /* Biru muted denim, kalem di mata */
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
+        }
+
+        .desc-text {
+            color: #6c757d;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            font-weight: 400;
+            padding: 0 10px;
+        }
+
+        /* Diubah menjadi warna lavender susu super tipis dan tulisan biru-abu kalem */
+        .tagline {
+            color: #6e83b0; 
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 40px;
+            background: rgba(244, 240, 249, 0.8);
+            padding: 6px 16px;
+            border-radius: 100px;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+
+        /* Group Tombol */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .btn {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: block;
+            letter-spacing: 0.3px;
+        }
+
+        /* Tombol Utama (Kirim Curhat) */
+        .btn-curhat {
+            background-color: #7fa4c7; /* Biru pastel estetik */
+            color: white;
+            box-shadow: 0 8px 20px rgba(127, 164, 199, 0.25);
+        }
+
+        .btn-curhat:hover {
+            background-color: #6b92b7;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(127, 164, 199, 0.35);
+        }
+
+        /* Tombol Sekunder (Cek Balasan) */
+        .btn-cek {
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #5b73a7;
+            border: 1px solid rgba(127, 164, 199, 0.4);
+        }
+
+        .btn-cek:hover {
+            background-color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Kartu Utama -->
+    <div class="card">
+        <h1>Mau Cerita, Nip 💐</h1>
+        <p class="desc-text">Keluarin isi hati kalian sekarang jugaa~!!</p>
+        
+        <p class="tagline">✨ Tempat cerita tanpa di-judge ahayy ✨</p>
+        
+        <!-- Tombol Menu -->
+        <div class="btn-group">
+            <a href="curhat.html" class="btn btn-curhat">Kirim Cerita 💬</a>
+            <a href="cek.html" class="btn btn-cek">Cek Balasan 🪧</a>
+        </div>
+    </div>
+
+</body>
+</html>
